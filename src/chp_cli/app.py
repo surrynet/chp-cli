@@ -18,6 +18,7 @@ def tensorboard(suffix, port, logdir):
     cmd = ['tensorboard',
         '--port=' + str(port),
         '--logdir=' + logdir,
+        '--path_prefix=/tensorboard/' + suffix + '/',
         '--bind_all'
     ]
     run(cmd)
