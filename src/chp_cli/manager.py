@@ -55,6 +55,7 @@ Example
     ''')
 
 def main():
+    proxy = None
     proxy_url = None
     argument = None
     port = None
