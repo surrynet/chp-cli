@@ -53,6 +53,7 @@ Example
     chp-cli remove tensorboard -s board
     chp-cli status tensorboard
     ''')
+    sys.exit(0)
 
 def main():
     proxy = None
@@ -60,22 +61,23 @@ def main():
     argument = None
     port = None
     suffix = None
-    help = False
     action = 'status'
     application = None
 
-    try:
-        if len(sys.argv) > 2 and sys.argv[1] and sys.argv[2]:
+    try: 
+        if len(sys.argv) > 1 and sys.argv[1]:
             action = sys.argv[1]
-            application = sys.argv[2]
             if action in ('-h', '--help'):
-                help = True
+                usage()
             elif action not in ('create', 'remove', 'status'):
                 raise getopt.GetoptError('ACTION: ' + action)
+            if sys.argv[2]:
+                application = sys.argv[2]
+            else:
+                raise getopt.GetoptError('APPLICATION: ' + application)
         else:
             raise getopt.GetoptError('OPTIONS')
             
- 
         opts, args = getopt.getopt(sys.argv[3:], 'p:s:h', ['port=', 'suffix=', 'help'])
         for o, a in opts:
             if o in ('-p', '--port'):
@@ -83,14 +85,10 @@ def main():
             elif o in ('-s', '--suffix'):
                 suffix = a
             elif o in ('-h', '--help'):
-                help = True
+                usage()
             else:
                 assert 'Unhandled options'
 
-        if help:
-            usage()
-            sys.exit(0)
-            
         proxy = Proxy(application)
         method = getattr(proxy, action)
         
