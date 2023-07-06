@@ -138,7 +138,8 @@ def main():
                 print(ret)
             
     except Exception as e:
-        proxy.remove(suffix)
+        if proxy:
+            proxy.remove(suffix)
         raise e
     
     sys.exit(0)
