@@ -1,3 +1,5 @@
+from subprocess import run
+
 def voila(suffix, port, ipynb, theme='dark', template='lab'):
     cmd = ['voila',
         '--no-browser',
@@ -14,7 +16,8 @@ def voila(suffix, port, ipynb, theme='dark', template='lab'):
 
 def tensorboard(suffix, port, logdir):
     cmd = ['tensorboard',
-        '--port', + str(port),
-        '--logdir=', + logdir
+        '--port=' + str(port),
+        '--logdir=' + logdir,
+        '--bind_all'
     ]
     run(cmd)

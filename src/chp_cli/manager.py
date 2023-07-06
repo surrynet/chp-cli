@@ -4,7 +4,7 @@ import getopt
 import json
 import signal
 import socket
-from subprocess import run, getoutput
+from subprocess import getoutput
 from threading import Thread
 
 from .proxy import Proxy
@@ -37,9 +37,9 @@ Options
 -p, --port <Int>
     application instance port
 -s, --suffix <String>
-    JupyterHub에서 application intance 접근 경로 /application/<String>
+    JupyterHub에서 application intance 접근 경로 /<APPLICATION>/<String>
     동일한 suffix가 존재하지 않도록 해야 한다.
-    브라우저 접근시 "http://JUPYTERHUB_HOST:PORT/application/<String>/"
+    브라우저 접근시 "http://JUPYTERHUB_HOST:PORT/<APPLICATION>/<String>/"
     traefix 사용시 JUPYTERHUB_HOST:PORT 없이 jupyter 도메인으로 접근 가능하다.
 -h, --help
     도움말
@@ -110,7 +110,7 @@ def main():
             hostname = socket.gethostname()
             proxy_url = 'http://' + hostname + ':' + port
 
-            if os.path.isfile(args[0]):
+            if os.path.exists(args[0]):
                 argument = args[0]
             else:
                 raise getopt.GetoptError('{} file is not exist'.format(args[0]))
@@ -130,8 +130,8 @@ def main():
                     item = ps.split()
                     pgid = item[3]
                     os.killpg(int(pgid), signal.SIGTERM)
-                    method(suffix)
                     print('Stop: ' + ' '.join(item[14:]))
+            method(suffix)
         else:
             method()
             ret = json.dumps(proxy.status())
