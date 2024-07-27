@@ -1,4 +1,1 @@
-#!/usr/bin/env python
-from setuptools import setup
-
-setup()
+__import__("setuptools").setup()
