@@ -1,0 +1,14 @@
+[project]
+name = "chp-cli"
+version = 
+dependencies = [
+    "requests",
+]
+
+[project.scripts]
+cli-name = "chp-cli.manager:main"
+
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
