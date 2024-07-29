@@ -1,14 +1,16 @@
 [project]
 name = "chp-cli"
-version = 
 dependencies = [
     "requests",
 ]
+dynamic = ["version"]
 
 [project.scripts]
-cli-name = "chp-cli.manager:main"
+cli-name = "chp_cli.manager:main"
 
 [build-system]
 requires = ['setuptools']
 build-backend = 'setuptools.build_meta'
 
+[tool.setuptools.dynamic]
+version = {attr = "chp_cli.__version__}
