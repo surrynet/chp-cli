@@ -6,7 +6,7 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-cli-name = "chp_cli.manager:main"
+chp-cli = "chp_cli.manager:main"
 
 [build-system]
 requires = ['setuptools']

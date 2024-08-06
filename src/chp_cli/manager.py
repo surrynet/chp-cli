@@ -10,7 +10,7 @@ from threading import Thread
 from .proxy import Proxy
 from .app import voila, tensorboard
 
-def usage():
+def usage(e=None):
     print('''chp-cli [ACTION] [APPLICATION] [ARGUMENT]
 
 configurable-http-proxy의 사용을 단순화한 운영툴
@@ -53,6 +53,8 @@ Example
     chp-cli remove tensorboard -s board
     chp-cli status tensorboard
     ''')
+    if e:
+        raise e
     sys.exit(0)
 
 def main():
@@ -139,6 +141,6 @@ def main():
     except Exception as e:
         if proxy:
             proxy.remove(suffix)
-        raise e
+        usage(e)
     
     sys.exit(0)

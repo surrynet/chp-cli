@@ -31,3 +31,5 @@ build/
 *.pid
 
 doc/html
+
+.ipynb_checkpoints
